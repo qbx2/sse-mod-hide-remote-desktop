@@ -26,4 +26,4 @@ jobs:
       uses: actions/upload-artifact@v2.2.2
       with:
         name: release
-        path: target/x86_64-pc-windows-gnu/release/hide_remote_desktop.dll
+        path: target/x86_64-pc-windows-gnu/release/
