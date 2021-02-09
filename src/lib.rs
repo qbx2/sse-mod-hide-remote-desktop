@@ -31,7 +31,7 @@ pub extern fn SKSEPlugin_Query(_: *const c_void, info: *mut PluginInfo) -> bool 
 }
 
 static_detour! {
-  static GetSystemMetrics: fn(i32) -> i32;
+    static GetSystemMetrics: fn(i32) -> i32;
 }
 
 fn new_get_system_metrics(n_index: i32) -> i32 {
