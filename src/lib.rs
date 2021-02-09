@@ -7,6 +7,7 @@ use std::io::Write;
 use std::os::raw::c_char;
 use winapi::um::libloaderapi::{GetModuleHandleA, GetProcAddress};
 use crate::log::get_log;
+use winapi::um::winuser::SM_REMOTESESSION;
 
 enum InfoVersion {
     KInfoVersion = 1,
@@ -30,12 +31,12 @@ pub extern fn SKSEPlugin_Query(_: *const c_void, info: *mut PluginInfo) -> bool 
 }
 
 static_detour! {
-  static GetSystemMetrics: fn(i64) -> i64;
+  static GetSystemMetrics: fn(i32) -> i32;
 }
 
-fn new_get_system_metrics(n_index: i64) -> i64 {
+fn new_get_system_metrics(n_index: i32) -> i32 {
     // is remote desktop? no ;)
-    let result = if n_index == 0x1000 {
+    let result = if n_index == SM_REMOTESESSION {
         0
     } else {
         GetSystemMetrics.call(n_index)
