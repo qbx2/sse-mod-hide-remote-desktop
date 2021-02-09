@@ -8,10 +8,6 @@ Removes "This application cannot be run from remote desktop." message.
 
 ## Build
 ```
-cargo build
-```
-
-## Cross Compilation?
-```
 rustup target add x86_64-pc-windows-gnu
+cargo build
 ```
